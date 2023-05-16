@@ -105,7 +105,9 @@
           "builder": "angular-cli-ghpages:deploy",
           "options": {
             "baseHref": "/restaurants/",
-            "noSilent": true
+            "noSilent": true,
+            "name": "Saul Winer",
+            "email": "karatesaul@me.com"
           }
         }
       }

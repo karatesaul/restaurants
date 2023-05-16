@@ -23,4 +23,6 @@ jobs:
           cmd: install
 
       - name: Deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn run deploy
