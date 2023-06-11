@@ -1,16 +1,18 @@
 @use '@angular/material' as mat;
 
-@include mat.core();
-
 $primary: mat.define-palette(mat.$indigo-palette);
 $accent: mat.define-palette(mat.$teal-palette);
+
+$typography: mat.define-typography-config(
+  $font-family: 'Open Sans'
+);
 
 $light-theme: mat.define-light-theme((
   color: (
     primary: $primary,
     accent: $accent
   ),
-  typography: mat.define-typography-config(),
+  typography: $typography,
   density: 0
 ));
 
@@ -19,11 +21,14 @@ $dark-theme: mat.define-dark-theme((
     primary: $primary,
     accent: $accent
   ),
-  typography: mat.define-typography-config(),
+  typography: $typography,
   density: 0
 ));
 
+@include mat.core();
+
 @include mat.core-theme($light-theme);
+@include mat.typography-hierarchy($typography);
 
 @include mat.all-component-themes($light-theme);
 
