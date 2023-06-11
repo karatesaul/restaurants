@@ -1,24 +1,26 @@
-<mat-toolbar color="primary">
-  <h1>Restaurant Picker</h1>
-</mat-toolbar>
-<mat-drawer-container class="drawer-container">
-  <mat-drawer #drawer
-    mode="side">
-    <mat-nav-list>
-      <a mat-list-item
-        *ngFor="let item of navItems"
-        [routerLink]="item.routerLink">
-        {{ item.label }}
-      </a>
-    </mat-nav-list>
-  </mat-drawer>
-  <mat-drawer-content>
-    <button class="drawer-toggle"
-      color="accent"
-      mat-icon-button
-      (click)="drawer.toggle()">
-      <mat-icon>{{ drawer.opened ? 'keyboard_double_arrow_left' : 'keyboard_double_arrow_right' }}</mat-icon>
-    </button>
-    <router-outlet></router-outlet>
-  </mat-drawer-content>
-</mat-drawer-container>
+<div class="app-container">
+  <mat-toolbar color="primary">
+    <h1>Restaurant Picker</h1>
+  </mat-toolbar>
+  <mat-drawer-container class="drawer-container">
+    <mat-drawer #drawer
+      mode="side">
+      <mat-nav-list>
+        <a mat-list-item
+          *ngFor="let item of navItems"
+          [routerLink]="item.routerLink">
+          {{ item.label }}
+        </a>
+      </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+      <button class="drawer-toggle"
+        color="accent"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon>{{ drawer.opened ? 'keyboard_double_arrow_left' : 'keyboard_double_arrow_right' }}</mat-icon>
+      </button>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

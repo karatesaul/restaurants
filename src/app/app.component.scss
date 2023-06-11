@@ -1,5 +1,11 @@
-.drawer-container {
+.app-container {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+}
+
+.drawer-container {
+  flex: 1;
 }
 
 .drawer-toggle {
