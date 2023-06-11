@@ -8,8 +8,8 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { RouterModule } from '@angular/router';
 
 type NavItem = {
-  routerLink: string;
   label: string;
+  routerLink: string;
 }
 
 @Component({
@@ -28,5 +28,8 @@ type NavItem = {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public navItems: NavItem[] = [];
+  public navItems: NavItem[] = [{
+    label: 'Restaurants',
+    routerLink: 'restaurants'
+  }];
 }
