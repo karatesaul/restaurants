@@ -3,4 +3,12 @@
     height: 100%;
     padding: 2rem;
   }
+
+  .list-page-header {
+    display: flex;
+
+    h1 {
+      flex: 1;
+    }
+  }
 }
