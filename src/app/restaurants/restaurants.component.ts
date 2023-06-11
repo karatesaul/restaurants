@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Signal, WritableSignal, signal } from '@angular/core';
+import { Component, OnInit, WritableSignal, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
 import { RestaurantService } from '../data/restaurant.service';
 import { Restaurant } from '../types/restaurant.type';
 
@@ -13,7 +15,9 @@ enum RestaurantsColumns {
   standalone: true,
   imports: [
     CommonModule,
-    MatTableModule
+    MatButtonModule,
+    MatTableModule,
+    RouterModule
   ],
   templateUrl: './restaurants.component.html',
   styleUrls: ['./restaurants.component.scss']

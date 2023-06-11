@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { Restaurant } from '../types/restaurant.type';
 import { EMPTY, Observable } from 'rxjs';
 
+export interface CreateRestaurantPayload {
+  name: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,8 +13,8 @@ export class RestaurantService {
 
   constructor() { }
 
-  public create(r: Restaurant): Observable<void> {
-    console.log('Create: Empty Stub for now.')
+  public create(r: CreateRestaurantPayload): Observable<void> {
+    console.log('Create:', r);
     return EMPTY;
   }
 

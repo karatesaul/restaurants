@@ -1,5 +1,13 @@
 <div class="list-page">
-  <h1>Restaurants</h1>
+  <div class="list-page-header">
+    <h1>Restaurants</h1>
+    <a
+      mat-flat-button
+      color="primary"
+      routerLink="add">
+      Add Restaurant
+    </a>
+  </div>
   <table
     mat-table
     [dataSource]="restaurants()">
@@ -28,3 +36,4 @@
     </tr>
   </table>
 </div>
+<router-outlet></router-outlet>
