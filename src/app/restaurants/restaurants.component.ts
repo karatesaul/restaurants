@@ -35,4 +35,8 @@ export class RestaurantsComponent implements OnInit {
   ngOnInit() {
     this.restaurantService.list().subscribe(data => this.restaurants.set(data))
   }
+
+  onDeactivate() {
+    this.restaurantService.list().subscribe(data => this.restaurants.set(data))
+  }
 }
