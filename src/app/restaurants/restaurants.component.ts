@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { RestaurantService } from '../data/restaurant.service';
 import { Restaurant } from '../types/restaurant.type';
 
 enum RestaurantsColumns {
-  Name = 'name'
+  Id = 'id',
+  Name = 'name',
+  Tags = 'tags'
 }
 
 @Component({
@@ -16,6 +19,7 @@ enum RestaurantsColumns {
   imports: [
     CommonModule,
     MatButtonModule,
+    MatChipsModule,
     MatTableModule,
     RouterModule
   ],
@@ -25,7 +29,8 @@ enum RestaurantsColumns {
 export class RestaurantsComponent implements OnInit {
   public readonly columns: typeof RestaurantsColumns = RestaurantsColumns;
   public readonly displayedColumns: RestaurantsColumns[] = [
-    RestaurantsColumns.Name
+    RestaurantsColumns.Name,
+    RestaurantsColumns.Tags
   ];
 
   public restaurants: WritableSignal<Restaurant[]> = signal([]);
