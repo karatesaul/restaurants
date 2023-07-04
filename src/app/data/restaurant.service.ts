@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Restaurant } from '../types/restaurant.type';
+import { CreateRestaurantPayload, Restaurant } from '../types/restaurant.type';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import { DatabaseService } from './database.service';
 import { LoggerService } from '../logger.service';
-
-export interface CreateRestaurantPayload {
-  name: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +19,9 @@ export class RestaurantService {
     return this.database.create<CreateRestaurantPayload>('restaurants', payload);
   }
 
-  public read(id: string): Observable<Restaurant> {
-    this.logger.log('Read: Empty Stub for now.')
-    return EMPTY;
+  public read(id: number): Observable<Restaurant> {
+    this.logger.log('RestaurantService: Read', id);
+    return this.database.read('restaurants', id);
   }
 
   public list(): Observable<Restaurant[]> {
