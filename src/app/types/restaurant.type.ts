@@ -1,4 +1,4 @@
 export interface Restaurant {
-  id: string;
+  id?: number; // Primary key, optional to allow Dexie to autoincrement.
   name: string;
 }

@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Restaurant } from '../types/restaurant.type';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, Observable, from, of, switchMap, tap } from 'rxjs';
 import { DatabaseService } from './database.service';
 import { LoggerService } from '../logger.service';
-
-export interface CreateRestaurantPayload {
-  name: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +14,10 @@ export class RestaurantService {
     private readonly logger: LoggerService
   ) { }
 
-  public create(payload: CreateRestaurantPayload): Observable<number> {
+  public create(payload: Restaurant): Observable<number> {
     this.logger.debug('RestaurantService: Create', payload);
-    return this.database.create<CreateRestaurantPayload>('restaurants', payload);
+
+    return from(this.database.db.restaurants.add(payload));
   }
 
   public read(id: string): Observable<Restaurant> {
@@ -30,7 +27,8 @@ export class RestaurantService {
 
   public list(): Observable<Restaurant[]> {
     this.logger.debug('RestaurantService: List');
-    return this.database.list('restaurants');
+
+    return from(this.database.db.restaurants.toArray());
   }
 
   public search(): Observable<Restaurant[]> {
