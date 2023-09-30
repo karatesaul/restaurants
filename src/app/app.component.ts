@@ -31,5 +31,8 @@ export class AppComponent {
   public navItems: NavItem[] = [{
     label: 'Restaurants',
     routerLink: 'restaurants'
+  }, {
+    label: 'Tags',
+    routerLink: 'tags'
   }];
 }

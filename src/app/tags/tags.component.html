@@ -1,0 +1,14 @@
+<div class="list-page">
+  <div class="list-page-header">
+    <h1>Tags</h1>
+  </div>
+
+  <ag-grid-angular
+    class="list-table"
+    [ngClass]="'ag-theme-alpine' | darkTheme"
+    [columnDefs]="columnDefs"
+    (gridReady)="$event.api.sizeColumnsToFit()"
+    (gridSizeChanged)="$event.api.sizeColumnsToFit()"
+    [rowData]="tags()">
+  </ag-grid-angular>
+</div>
