@@ -3,18 +3,19 @@ import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
+import { AgGridModule } from 'ag-grid-angular';
+import { ColDef } from 'ag-grid-community';
+import { DarkThemePipe } from '../dark-theme.pipe';
 import { RestaurantService } from '../data/restaurant.service';
 import { Restaurant } from '../types/restaurant.type';
-
-enum RestaurantsColumns {
-  Name = 'name'
-}
 
 @Component({
   selector: 'app-restaurants',
   standalone: true,
   imports: [
+    AgGridModule,
     CommonModule,
+    DarkThemePipe,
     MatButtonModule,
     MatTableModule,
     RouterModule
@@ -23,10 +24,9 @@ enum RestaurantsColumns {
   styleUrls: ['./restaurants.component.scss']
 })
 export class RestaurantsComponent implements OnInit {
-  public readonly columns: typeof RestaurantsColumns = RestaurantsColumns;
-  public readonly displayedColumns: RestaurantsColumns[] = [
-    RestaurantsColumns.Name
-  ];
+  public columnDefs: ColDef[] = [{
+    field: 'name'
+  }]
 
   public restaurants: WritableSignal<Restaurant[]> = signal([]);
 

@@ -8,32 +8,14 @@
       Add Restaurant
     </a>
   </div>
-  <table
-    mat-table
-    [dataSource]="restaurants()">
 
-    <!-- Name -->
-    <ng-container [matColumnDef]="columns.Name">
-      <th
-        mat-header-cell
-        *matHeaderCellDef>
-        Name
-      </th>
-      <td
-        mat-cell
-        *matCellDef="let restaurant">
-        {{ restaurant.name }}
-      </td>
-    </ng-container>
-
-    <tr
-      mat-header-row
-      *matHeaderRowDef="displayedColumns">
-    </tr>
-    <tr
-      mat-row
-      *matRowDef="let row; columns: displayedColumns">
-    </tr>
-  </table>
+  <ag-grid-angular
+    class="list-table"
+    [ngClass]="'ag-theme-alpine' | darkTheme"
+    [columnDefs]="columnDefs"
+    (gridReady)="$event.api.sizeColumnsToFit()"
+    (gridSizeChanged)="$event.api.sizeColumnsToFit()"
+    [rowData]="restaurants()">
+  </ag-grid-angular>
 </div>
 <router-outlet (deactivate)="onDeactivate()"></router-outlet>

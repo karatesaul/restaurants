@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use 'ag-grid-community/styles' as ag;
 
 $primary: mat.define-palette(mat.$indigo-palette);
 $accent: mat.define-palette(mat.$teal-palette);
@@ -31,6 +32,10 @@ $dark-theme: mat.define-dark-theme((
 @include mat.typography-hierarchy($typography);
 
 @include mat.all-component-themes($light-theme);
+
+@include ag.grid-styles((
+  themes: (alpine, alpine-dark)
+));
 
 @media (prefers-color-scheme: dark) {
   @include mat.all-component-colors($dark-theme);
