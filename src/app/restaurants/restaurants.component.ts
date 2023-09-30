@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { AgGridModule } from 'ag-grid-angular';
 import { ColDef } from 'ag-grid-community';
@@ -17,7 +16,6 @@ import { Restaurant } from '../types/restaurant.type';
     CommonModule,
     DarkThemePipe,
     MatButtonModule,
-    MatTableModule,
     RouterModule
   ],
   templateUrl: './restaurants.component.html',

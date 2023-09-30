@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject, Subject, Subscriber, take, throwError } from 'rxjs';
-import { LoggerService } from '../logger.service';
 import Dexie, { Table } from "dexie";
+import { LoggerService } from '../logger.service';
 import { Restaurant } from '../types/restaurant.type';
 
 export class Db extends Dexie {

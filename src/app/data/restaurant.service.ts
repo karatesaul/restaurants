@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Restaurant } from '../types/restaurant.type';
-import { EMPTY, Observable, from, of, switchMap, tap } from 'rxjs';
-import { DatabaseService } from './database.service';
+import { EMPTY, Observable, from } from 'rxjs';
 import { LoggerService } from '../logger.service';
+import { Restaurant } from '../types/restaurant.type';
+import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root'
