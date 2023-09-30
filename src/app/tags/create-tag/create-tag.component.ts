@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { CreateRestaurantDialogComponent } from './create-restaurant-dialog/create-restaurant-dialog.component';
+import { TagsService } from '../../data/tags.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RestaurantService } from '../../data/restaurant.service';
+import { CreateTagDialogComponent } from './create-tag-dialog/create-tag-dialog.component';
 import { EMPTY, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-create-restaurant',
+  selector: 'app-create-tag',
   standalone: true,
   imports: [
     CommonModule,
@@ -15,29 +15,27 @@ import { EMPTY, switchMap } from 'rxjs';
   ],
   template: ''
 })
-export class CreateRestaurantComponent implements OnInit {
+export class CreateTagComponent implements OnInit {
   constructor(
     private readonly matDialog: MatDialog,
-    private readonly restaurantService: RestaurantService,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly tagsService: TagsService
   ) { }
 
   ngOnInit(): void {
-    this.matDialog.open(CreateRestaurantDialogComponent, {
-      minWidth: 500
-    }).afterClosed().pipe(
+    this.matDialog.open(CreateTagDialogComponent).afterClosed().pipe(
       switchMap(data => {
         if (!data) {
           return EMPTY;
         }
 
-        return this.restaurantService.create(data);
+        return this.tagsService.create(data)
       })
     ).subscribe({
       complete: () => {
         this.router.navigate(['..'], { relativeTo: this.route })
       }
-    });
+    })
   }
 }
