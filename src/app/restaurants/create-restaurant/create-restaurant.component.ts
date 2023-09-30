@@ -24,7 +24,9 @@ export class CreateRestaurantComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.matDialog.open(CreateRestaurantDialogComponent)
+    this.matDialog.open(CreateRestaurantDialogComponent, {
+      minWidth: 500
+    })
       .afterClosed().pipe(
         switchMap(data => {
           if (!data) {

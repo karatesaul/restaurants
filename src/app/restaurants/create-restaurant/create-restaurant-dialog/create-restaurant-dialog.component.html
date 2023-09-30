@@ -1,14 +1,45 @@
 <form [formGroup]="form">
   <h1 mat-dialog-title>Add Restaurant</h1>
   <mat-dialog-content>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput [formControl]="name"/>
-      </mat-form-field>
+    <!-- Name -->
+    <mat-form-field class="form-layout-field">
+      <mat-label>Name</mat-label>
+      <input matInput [formControl]="name"/>
+    </mat-form-field>
+
+    <!-- Tags -->
+    <mat-form-field class="form-layout-field">
+      <mat-label>Tags</mat-label>
+      <mat-chip-grid #chipGrid>
+        <mat-chip-row *ngFor="let tag of tags" (removed)="remove(tag)">
+          {{ tag }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      </mat-chip-grid>
+      <input
+        #tagsInput
+        placeholder="New Tags..."
+        [formControl]="tagsCtrl"
+        [matChipInputFor]="chipGrid"
+        [matAutocomplete]="auto"
+        (matChipInputTokenEnd)="add($event)"/>
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="selected($event)">
+        <mat-option
+          *ngFor="let tag of existingTags"
+          [value]="tag">
+          {{ tag }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button
-      [mat-dialog-close]="form.value"
+      [mat-dialog-close]="getRestaurantPayload()"
       mat-flat-button
       color="primary"
       type="submit">
