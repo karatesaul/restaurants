@@ -12,7 +12,7 @@
       <mat-label>Tags</mat-label>
       <mat-chip-grid #chipGrid>
         <mat-chip-row *ngFor="let tag of tags" (removed)="remove(tag)">
-          {{ tag }}
+          {{ tag.value }}
           <button matChipRemove>
             <mat-icon>cancel</mat-icon>
           </button>
@@ -27,11 +27,12 @@
         (matChipInputTokenEnd)="add($event)"/>
       <mat-autocomplete
         #auto="matAutocomplete"
+        autoActiveFirstOption
         (optionSelected)="selected($event)">
         <mat-option
-          *ngFor="let tag of existingTags"
-          [value]="tag">
-          {{ tag }}
+          *ngFor="let tag of filteredTags()"
+          [value]="tag.id">
+          {{ tag.value }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
