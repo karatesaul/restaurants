@@ -8,9 +8,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CreateRestaurantPayload } from '../../../types/restaurant.type';
 import { TagsService } from '../../../data/tags.service';
-import { Tag } from '../../../types/tag.type';
+import { CreateTagPayload, Tag } from '../../../types/tag.type';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-create-restaurant-dialog',
@@ -24,6 +26,7 @@ import { Tag } from '../../../types/tag.type';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatSnackBarModule,
     ReactiveFormsModule
   ],
   templateUrl: './create-restaurant-dialog.component.html',
@@ -39,7 +42,10 @@ export class CreateRestaurantDialogComponent implements OnInit {
   tagsCtrl: FormControl = new FormControl();
   @ViewChild('tagsInput') tagsInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private readonly tagsService: TagsService) {
+  constructor(
+    private readonly matSnackBar: MatSnackBar,
+    private readonly tagsService: TagsService
+  ) {
     this.form = new FormGroup({
       name: this.name,
       tags: this.tagsCtrl
@@ -54,7 +60,24 @@ export class CreateRestaurantDialogComponent implements OnInit {
   add(event: MatChipInputEvent): void {
     const value: string = (event.value || '').trim();
 
-    console.warn('No pre-existing tag with name', value);
+    if (value) {
+      this.tagsService.create({
+        value
+      } as CreateTagPayload).pipe(
+        tap(() => {
+          this.matSnackBar.open(`Created new tag with name "${value}"`, undefined, {
+            duration: 3000
+          });
+        }),
+        switchMap((tagId: number) => this.tagsService.read(tagId))
+      ).subscribe((tag: Tag | undefined) => {
+        if (!tag) {
+          throw new Error('Error reading new tag');
+        }
+
+        this.tags.push(tag);
+      })
+    }
 
     event.chipInput.clear();
     this.tagsCtrl.setValue(null);
