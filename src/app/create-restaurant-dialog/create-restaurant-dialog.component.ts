@@ -1,18 +1,18 @@
-import { Component, ElementRef, OnInit, Signal, ViewChild, WritableSignal, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, ElementRef, OnInit, Signal, ViewChild, WritableSignal, computed, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { CreateRestaurantPayload } from '../../../types/restaurant.type';
-import { TagsService } from '../../../data/tags.service';
-import { CreateTagPayload, Tag } from '../../../types/tag.type';
 import { switchMap, tap } from 'rxjs';
+import { TagsService } from '../data/tags.service';
+import { CreateRestaurantPayload } from '../types/restaurant.type';
+import { CreateTagPayload, Tag } from '../types/tag.type';
 
 @Component({
   selector: 'app-create-restaurant-dialog',

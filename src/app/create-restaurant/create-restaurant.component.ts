@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { CreateRestaurantDialogComponent } from './create-restaurant-dialog/create-restaurant-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RestaurantService } from '../../data/restaurant.service';
 import { EMPTY, switchMap } from 'rxjs';
+import { CreateRestaurantDialogComponent } from '../create-restaurant-dialog/create-restaurant-dialog.component';
+import { RestaurantService } from '../data/restaurant.service';
 
 @Component({
   selector: 'app-create-restaurant',
