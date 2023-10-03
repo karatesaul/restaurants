@@ -19,3 +19,9 @@
     flex: 1;
   }
 }
+
+@mixin form-layout {
+  .form-layout-field {
+    display: flex;
+  }
+}
