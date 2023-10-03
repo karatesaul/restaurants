@@ -7,7 +7,7 @@ import { CreateRestaurantDialogComponent } from '../create-restaurant-dialog/cre
 import { RestaurantService } from '../data/restaurant.service';
 
 @Component({
-  selector: 'app-create-restaurant',
+  selector: 'create-restaurant',
   standalone: true,
   imports: [
     CommonModule,

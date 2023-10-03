@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-tags',
+  selector: 'tags',
   standalone: true,
   imports: [
     AgGridModule,

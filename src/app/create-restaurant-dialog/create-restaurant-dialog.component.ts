@@ -15,7 +15,7 @@ import { CreateRestaurantPayload } from '../types/restaurant.type';
 import { CreateTagPayload, Tag } from '../types/tag.type';
 
 @Component({
-  selector: 'app-create-restaurant-dialog',
+  selector: 'create-restaurant-dialog',
   standalone: true,
   imports: [
     CommonModule,

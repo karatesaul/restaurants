@@ -7,7 +7,7 @@ import { CreateTagDialogComponent } from '../create-tag-dialog/create-tag-dialog
 import { TagsService } from '../data/tags.service';
 
 @Component({
-  selector: 'app-create-tag',
+  selector: 'create-tag',
   standalone: true,
   imports: [
     CommonModule,

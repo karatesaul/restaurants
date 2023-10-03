@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CreateTagPayload } from '../types/tag.type';
 
 @Component({
-  selector: 'app-create-tag-dialog',
+  selector: 'create-tag-dialog',
   standalone: true,
   imports: [
     CommonModule,

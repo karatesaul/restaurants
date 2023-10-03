@@ -9,7 +9,7 @@ import { RestaurantService } from '../data/restaurant.service';
 import { Restaurant } from '../types/restaurant.type';
 
 @Component({
-  selector: 'app-restaurants',
+  selector: 'restaurants',
   standalone: true,
   imports: [
     AgGridModule,
