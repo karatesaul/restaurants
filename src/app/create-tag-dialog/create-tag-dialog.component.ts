@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CreateTagPayload } from '../../../types/tag.type';
-import { MatButtonModule } from '@angular/material/button';
+import { CreateTagPayload } from '../types/tag.type';
 
 @Component({
   selector: 'app-create-tag-dialog',

@@ -7,8 +7,5 @@ export const routes: Routes = [{
 }, {
   path: 'tags',
   loadComponent: () => import('./app/tags/tags.component').then(mod => mod.TagsComponent),
-  children: [{
-    path: 'add',
-    loadComponent: () => import('./app/tags/create-tag/create-tag.component').then(mod => mod.CreateTagComponent)
-  }]
+  loadChildren: () => import('./app/tags/tags.routes').then(mod => mod.routes)
 }];

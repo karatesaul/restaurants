@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { TagsService } from '../../data/tags.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CreateTagDialogComponent } from './create-tag-dialog/create-tag-dialog.component';
 import { EMPTY, switchMap } from 'rxjs';
+import { CreateTagDialogComponent } from '../create-tag-dialog/create-tag-dialog.component';
+import { TagsService } from '../data/tags.service';
 
 @Component({
   selector: 'app-create-tag',
