@@ -8,6 +8,7 @@ import { DarkThemePipe } from '../dark-theme.pipe';
 import { RestaurantService } from '../data/restaurant.service';
 import { Restaurant } from '../types/restaurant.type';
 import { TagsCellComponent } from './tags-cell/tags-cell.component';
+import { ViewLinkCellComponent } from './view-link-cell/view-link-cell.component';
 
 @Component({
   selector: 'restaurants',
@@ -28,6 +29,10 @@ export class RestaurantsComponent implements OnInit {
   }, {
     field: 'tags',
     cellRenderer: TagsCellComponent
+  }, {
+    headerName: '',
+    cellRenderer: ViewLinkCellComponent,
+    type: 'rightAligned'
   }];
 
   public restaurants: WritableSignal<Restaurant[]> = signal([]);

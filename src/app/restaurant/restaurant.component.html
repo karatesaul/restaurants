@@ -1,0 +1,17 @@
+<div class="restaurant-page">
+  <h1>{{ restaurant()?.name }}</h1>
+  <div class="restaurant-tiles">
+    <mat-card class="restaurant-tile">
+      <mat-card-header>
+        <mat-card-title>Tags</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-chip-set>
+          <mat-chip *ngFor="let tag of tags()">
+            {{ tag.value }}
+          </mat-chip>
+        </mat-chip-set>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

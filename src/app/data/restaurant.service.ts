@@ -23,7 +23,7 @@ export class RestaurantService {
   public read(id: number): Observable<Restaurant | undefined> {
     this.logger.log('RestaurantService: Read', id);
 
-    return from(this.database.db.restaurants.get(id))
+    return from(this.database.db.restaurants.get(id));
   }
 
   public list(): Observable<Restaurant[]> {

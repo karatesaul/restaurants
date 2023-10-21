@@ -1,0 +1,13 @@
+.restaurant-page {
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.restaurant-tiles {
+  display: flex;
+  gap: 2rem;
+}
+
+.restaurant-tile {
+  width: 33%;
+}
