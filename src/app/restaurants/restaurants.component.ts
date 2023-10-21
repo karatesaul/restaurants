@@ -7,6 +7,7 @@ import { ColDef } from 'ag-grid-community';
 import { DarkThemePipe } from '../dark-theme.pipe';
 import { RestaurantService } from '../data/restaurant.service';
 import { Restaurant } from '../types/restaurant.type';
+import { TagsCellComponent } from './tags-cell/tags-cell.component';
 
 @Component({
   selector: 'restaurants',
@@ -24,7 +25,10 @@ import { Restaurant } from '../types/restaurant.type';
 export class RestaurantsComponent implements OnInit {
   public columnDefs: ColDef[] = [{
     field: 'name'
-  }]
+  }, {
+    field: 'tags',
+    cellRenderer: TagsCellComponent
+  }];
 
   public restaurants: WritableSignal<Restaurant[]> = signal([]);
 
