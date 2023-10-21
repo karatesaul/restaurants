@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkrestaurants=self.webpackChunkrestaurants||[]).push([[803],{803:(d,n,t)=>{t.r(n),t.d(n,{routes:()=>s});const s=[{path:"add",loadComponent:()=>Promise.all([t.e(938),t.e(708),t.e(592),t.e(445)]).then(t.bind(t,3445)).then(o=>o.CreateRestaurantComponent)}]}}]);
