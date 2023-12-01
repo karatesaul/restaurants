@@ -20,8 +20,8 @@ import { Tag } from '../types/tag.type';
   styleUrls: ['./restaurant.component.scss']
 })
 export default class RestaurantComponent {
-  restaurant: WritableSignal<Restaurant | null> = signal(null);
-  tags: WritableSignal<Tag[]> = signal([]);
+  public restaurant: WritableSignal<Restaurant | null> = signal(null);
+  public tags: WritableSignal<Tag[]> = signal([]);
 
   constructor(
     private readonly route: ActivatedRoute,

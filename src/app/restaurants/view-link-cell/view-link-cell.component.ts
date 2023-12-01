@@ -20,13 +20,13 @@ import { Restaurant } from '../../types/restaurant.type';
   styleUrls: ['./view-link-cell.component.scss']
 })
 export default class ViewLinkCellComponent implements ICellRendererAngularComp {
-  id?: string;
+  public id?: string;
 
-  agInit(params: ICellRendererParams<Restaurant>): void {
+  public agInit(params: ICellRendererParams<Restaurant>): void {
     this.id = String(params.data?.id);
   }
 
-  refresh(_params: ICellRendererParams<Restaurant>): boolean {
+  public refresh(_params: ICellRendererParams<Restaurant>): boolean {
     return false;
   }
 }

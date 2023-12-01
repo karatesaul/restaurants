@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export default class DarkThemePipe implements PipeTransform {
 
-  transform(value: string): string {
+  public transform(value: string): string {
     if (window.matchMedia('(prefers-color-scheme: dark)')) {
       return value.concat('-dark');
     }

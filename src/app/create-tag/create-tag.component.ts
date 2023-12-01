@@ -23,7 +23,7 @@ export default class CreateTagComponent implements OnInit {
     private readonly tagsService: TagsService
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.matDialog.open(CreateTagDialogComponent).afterClosed().pipe(
       switchMap(data => {
         if (!data) {

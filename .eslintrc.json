@@ -39,6 +39,15 @@
           "error",
           "last"
         ],
+        "@typescript-eslint/explicit-function-return-type": "warn",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "warn",
+          {
+            "overrides": {
+              "constructors": "off"
+            }
+          }
+        ],
         "@typescript-eslint/no-inferrable-types": 0,
         "@typescript-eslint/no-unused-vars": [
           "error",

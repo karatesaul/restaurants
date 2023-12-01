@@ -5,8 +5,8 @@ import { Restaurant } from '../types/restaurant.type';
 import { Tag } from '../types/tag.type';
 
 export class Db extends Dexie {
-  restaurants!: Table<Restaurant, number>;
-  tags!: Table<Tag, number>;
+  public restaurants!: Table<Restaurant, number>;
+  public tags!: Table<Tag, number>;
 
   constructor(version: number) {
     super('restaurants');

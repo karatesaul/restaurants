@@ -23,7 +23,7 @@ export default class CreateRestaurantComponent implements OnInit {
     private readonly router: Router
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.matDialog.open(CreateRestaurantDialogComponent, {
       minWidth: 500
     }).afterClosed().pipe(

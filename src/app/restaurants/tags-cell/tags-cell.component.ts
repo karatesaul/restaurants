@@ -18,11 +18,11 @@ import { Tag } from '../../types/tag.type';
   styleUrls: ['./tags-cell.component.scss']
 })
 export default class TagsCellComponent implements ICellRendererAngularComp {
-  tags: WritableSignal<Tag[]> = signal([]);
+  public tags: WritableSignal<Tag[]> = signal([]);
 
   constructor(private readonly tagsService: TagsService) { }
 
-  agInit(params: ICellRendererParams<Restaurant, Restaurant['tags']>): void {
+  public agInit(params: ICellRendererParams<Restaurant, Restaurant['tags']>): void {
     if (!params.value) {
       return;
     }
@@ -32,7 +32,7 @@ export default class TagsCellComponent implements ICellRendererAngularComp {
     });
   }
 
-  refresh(_params: ICellRendererParams<Restaurant, Restaurant['tags']>): boolean {
+  public refresh(_params: ICellRendererParams<Restaurant, Restaurant['tags']>): boolean {
     return false;
   }
 }

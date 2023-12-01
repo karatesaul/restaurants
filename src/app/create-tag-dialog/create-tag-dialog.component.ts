@@ -22,8 +22,8 @@ import { CreateTagPayload } from '../types/tag.type';
   styleUrls: ['./create-tag-dialog.component.scss']
 })
 export default class CreateTagDialogComponent {
-  form: FormGroup;
-  value: FormControl = new FormControl();
+  public form: FormGroup;
+  public value: FormControl = new FormControl();
 
   constructor() {
     this.form = new FormGroup({
@@ -31,7 +31,7 @@ export default class CreateTagDialogComponent {
     });
   }
 
-  getTagPayload(): CreateTagPayload {
+  public getTagPayload(): CreateTagPayload {
     return this.form.value;
   }
 }

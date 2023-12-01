@@ -33,14 +33,14 @@ import { CreateTagPayload, Tag } from '../types/tag.type';
   styleUrls: ['./create-restaurant-dialog.component.scss']
 })
 export default class CreateRestaurantDialogComponent implements OnInit {
-  existingTags: WritableSignal<Tag[]> = signal([]);
-  filteredTags: Signal<Tag[]> = computed(() => this.filterTags());
-  filterValue: WritableSignal<string> = signal('');
-  form: FormGroup;
-  name: FormControl = new FormControl();
-  tags: Tag[] = [];
-  tagsCtrl: FormControl = new FormControl();
-  @ViewChild('tagsInput') tagsInput!: ElementRef<HTMLInputElement>;
+  public existingTags: WritableSignal<Tag[]> = signal([]);
+  public filteredTags: Signal<Tag[]> = computed(() => this.filterTags());
+  public filterValue: WritableSignal<string> = signal('');
+  public form: FormGroup;
+  public name: FormControl = new FormControl();
+  public tags: Tag[] = [];
+  public tagsCtrl: FormControl = new FormControl();
+  @ViewChild('tagsInput') public tagsInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private readonly matSnackBar: MatSnackBar,
@@ -52,12 +52,12 @@ export default class CreateRestaurantDialogComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.tagsService.list().subscribe(data => this.existingTags.set(data));
     this.tagsCtrl.valueChanges.subscribe(value => this.filterValue.set(value));
   }
 
-  add(event: MatChipInputEvent): void {
+  public add(event: MatChipInputEvent): void {
     const value: string = (event.value || '').trim();
 
     if (value) {
@@ -83,18 +83,18 @@ export default class CreateRestaurantDialogComponent implements OnInit {
     this.tagsCtrl.setValue(null);
   }
 
-  filterTags(): Tag[] {
+  public filterTags(): Tag[] {
     return this.existingTags().filter((tag: Tag) => tag.value.includes(this.filterValue()));
   }
 
-  getRestaurantPayload(): CreateRestaurantPayload {
+  public getRestaurantPayload(): CreateRestaurantPayload {
     return {
       ...this.form.value,
       tags: this.tags.map((tag: Tag) => tag.id)
     } as CreateRestaurantPayload;
   }
 
-  remove(tag: Tag): void {
+  public remove(tag: Tag): void {
     const index: number = this.tags.indexOf(tag);
 
     if (index >= 0) {
@@ -102,7 +102,7 @@ export default class CreateRestaurantDialogComponent implements OnInit {
     }
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
+  public selected(event: MatAutocompleteSelectedEvent): void {
     const selectedTag: Tag | undefined = this.existingTags().find((tag: Tag) => tag.id === event.option.value);
 
     if (!selectedTag) {
