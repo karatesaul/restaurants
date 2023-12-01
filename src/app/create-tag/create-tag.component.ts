@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, switchMap } from 'rxjs';
-import { CreateTagDialogComponent } from '../create-tag-dialog/create-tag-dialog.component';
-import { TagsService } from '../data/tags.service';
+import CreateTagDialogComponent from '../create-tag-dialog/create-tag-dialog.component';
+import TagsService from '../data/tags.service';
 
 @Component({
   selector: 'create-tag',
@@ -15,7 +15,7 @@ import { TagsService } from '../data/tags.service';
   ],
   template: ''
 })
-export class CreateTagComponent implements OnInit {
+export default class CreateTagComponent implements OnInit {
   constructor(
     private readonly matDialog: MatDialog,
     private readonly route: ActivatedRoute,

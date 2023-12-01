@@ -1,18 +1,19 @@
 import { Routes } from "@angular/router";
-import { restaurantResolver } from "./app/restaurant/restaurant.resolver";
+import restaurantResolver from "./app/restaurant/restaurant.resolver";
 
-export const routes: Routes = [{
+const routes: Routes = [{
   path: 'restaurants',
-  loadComponent: () => import('./app/restaurants/restaurants.component').then(mod => mod.RestaurantsComponent),
-  loadChildren: () => import('./app/restaurants/restaurants.routes').then(mod => mod.routes)
+  loadComponent: () => import('./app/restaurants/restaurants.component'),
+  loadChildren: () => import('./app/restaurants/restaurants.routes')
 }, {
   path: 'restaurants/:id',
-  loadComponent: () => import('./app/restaurant/restaurant.component').then(mod => mod.RestaurantComponent),
+  loadComponent: () => import('./app/restaurant/restaurant.component'),
   resolve: {
     restaurant: restaurantResolver
   }
 }, {
   path: 'tags',
-  loadComponent: () => import('./app/tags/tags.component').then(mod => mod.TagsComponent),
-  loadChildren: () => import('./app/tags/tags.routes').then(mod => mod.routes)
+  loadComponent: () => import('./app/tags/tags.component'),
+  loadChildren: () => import('./app/tags/tags.routes')
 }];
+export default routes;

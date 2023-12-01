@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { Component, WritableSignal, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { ActivatedRoute, Data } from '@angular/router';
-import { Restaurant } from '../types/restaurant.type';
 import { MatChipsModule } from '@angular/material/chips';
-import { Tag } from '../types/tag.type';
+import { ActivatedRoute, Data } from '@angular/router';
 import { switchMap, tap } from 'rxjs';
-import { TagsService } from '../data/tags.service';
+import TagsService from '../data/tags.service';
+import { Restaurant } from '../types/restaurant.type';
+import { Tag } from '../types/tag.type';
 
 @Component({
   selector: 'restaurant',
@@ -19,7 +19,7 @@ import { TagsService } from '../data/tags.service';
   templateUrl: './restaurant.component.html',
   styleUrls: ['./restaurant.component.scss']
 })
-export class RestaurantComponent {
+export default class RestaurantComponent {
   restaurant: WritableSignal<Restaurant | null> = signal(null);
   tags: WritableSignal<Tag[]> = signal([]);
 

@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, switchMap } from 'rxjs';
-import { CreateRestaurantDialogComponent } from '../create-restaurant-dialog/create-restaurant-dialog.component';
-import { RestaurantService } from '../data/restaurant.service';
+import CreateRestaurantDialogComponent from '../create-restaurant-dialog/create-restaurant-dialog.component';
+import RestaurantService from '../data/restaurant.service';
 
 @Component({
   selector: 'create-restaurant',
@@ -15,7 +15,7 @@ import { RestaurantService } from '../data/restaurant.service';
   ],
   template: ''
 })
-export class CreateRestaurantComponent implements OnInit {
+export default class CreateRestaurantComponent implements OnInit {
   constructor(
     private readonly matDialog: MatDialog,
     private readonly restaurantService: RestaurantService,

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { DatabaseService } from './database.service';
-import { LoggerService } from '../logger.service';
-import { CreateTagPayload, Tag } from '../types/tag.type';
 import { Observable, from } from 'rxjs';
+import LoggerService from '../logger.service';
+import { CreateTagPayload, Tag } from '../types/tag.type';
+import DatabaseService from './database.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TagsService {
+export default class TagsService {
 
   constructor(
     private readonly database: DatabaseService,

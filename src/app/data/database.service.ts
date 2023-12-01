@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import Dexie, { Table } from "dexie";
-import { LoggerService } from '../logger.service';
+import LoggerService from '../logger.service';
 import { Restaurant } from '../types/restaurant.type';
 import { Tag } from '../types/tag.type';
 
@@ -20,7 +20,7 @@ export class Db extends Dexie {
 @Injectable({
   providedIn: 'root'
 })
-export class DatabaseService {
+export default class DatabaseService {
   public version: number = 2;
   public db: Db
 

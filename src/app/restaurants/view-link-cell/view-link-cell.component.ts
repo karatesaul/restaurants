@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ICellRendererAngularComp } from 'ag-grid-angular';
-import { ICellRendererParams } from 'ag-grid-community';
-import { RouterModule } from '@angular/router';
-import { Restaurant } from '../../types/restaurant.type';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
+import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { ICellRendererParams } from 'ag-grid-community';
+import { Restaurant } from '../../types/restaurant.type';
 
 @Component({
   selector: 'view-link-cell',
@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './view-link-cell.component.html',
   styleUrls: ['./view-link-cell.component.scss']
 })
-export class ViewLinkCellComponent implements ICellRendererAngularComp {
+export default class ViewLinkCellComponent implements ICellRendererAngularComp {
   id?: string;
 
   agInit(params: ICellRendererParams<Restaurant>): void {

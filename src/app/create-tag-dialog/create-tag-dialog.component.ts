@@ -21,7 +21,7 @@ import { CreateTagPayload } from '../types/tag.type';
   templateUrl: './create-tag-dialog.component.html',
   styleUrls: ['./create-tag-dialog.component.scss']
 })
-export class CreateTagDialogComponent {
+export default class CreateTagDialogComponent {
   form: FormGroup;
   value: FormControl = new FormControl();
 

@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { switchMap, tap } from 'rxjs';
-import { TagsService } from '../data/tags.service';
+import TagsService from '../data/tags.service';
 import { CreateRestaurantPayload } from '../types/restaurant.type';
 import { CreateTagPayload, Tag } from '../types/tag.type';
 
@@ -32,7 +32,7 @@ import { CreateTagPayload, Tag } from '../types/tag.type';
   templateUrl: './create-restaurant-dialog.component.html',
   styleUrls: ['./create-restaurant-dialog.component.scss']
 })
-export class CreateRestaurantDialogComponent implements OnInit {
+export default class CreateRestaurantDialogComponent implements OnInit {
   existingTags: WritableSignal<Tag[]> = signal([]);
   filteredTags: Signal<Tag[]> = computed(() => this.filterTags());
   filterValue: WritableSignal<string> = signal('');

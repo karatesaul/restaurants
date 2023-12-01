@@ -27,7 +27,7 @@ type NavItem = {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export default class AppComponent {
   public navItems: NavItem[] = [{
     label: 'Restaurants',
     routerLink: 'restaurants'

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable, from } from 'rxjs';
-import { LoggerService } from '../logger.service';
+import LoggerService from '../logger.service';
 import { Restaurant } from '../types/restaurant.type';
-import { DatabaseService } from './database.service';
+import DatabaseService from './database.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RestaurantService {
+export default class RestaurantService {
 
   constructor(
     private readonly database: DatabaseService,
