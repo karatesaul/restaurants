@@ -30,12 +30,12 @@ export default class CreateTagComponent implements OnInit {
           return EMPTY;
         }
 
-        return this.tagsService.create(data)
+        return this.tagsService.create(data);
       })
     ).subscribe({
       complete: () => {
-        this.router.navigate(['..'], { relativeTo: this.route })
+        this.router.navigate(['..'], { relativeTo: this.route });
       }
-    })
+    });
   }
 }

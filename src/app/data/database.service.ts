@@ -22,7 +22,7 @@ export class Db extends Dexie {
 })
 export default class DatabaseService {
   public version: number = 2;
-  public db: Db
+  public db: Db;
 
   constructor(private readonly logger: LoggerService) {
     this.db = new Db(this.version);

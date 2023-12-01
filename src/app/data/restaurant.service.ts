@@ -33,22 +33,22 @@ export default class RestaurantService {
   }
 
   public search(): Observable<Restaurant[]> {
-    this.logger.log('Search: Empty Stub for now.')
+    this.logger.log('Search: Empty Stub for now.');
     return EMPTY;
   }
 
   public randomSearch(): Observable<Restaurant> {
-    this.logger.log('RandomSearch: Empty Stub for now.')
+    this.logger.log('RandomSearch: Empty Stub for now.');
     return EMPTY;
   }
 
-  public update(r: Restaurant): Observable<void> {
-    this.logger.log('Update: Empty Stub for now.')
+  public update(_r: Restaurant): Observable<void> {
+    this.logger.log('Update: Empty Stub for now.');
     return EMPTY;
   }
 
-  public delete(id: string): Observable<void> {
-    this.logger.log('Delete: Empty Stub for now.')
+  public delete(_id: string): Observable<void> {
+    this.logger.log('Delete: Empty Stub for now.');
     return EMPTY;
   }
 }

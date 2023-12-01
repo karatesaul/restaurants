@@ -32,7 +32,7 @@ export default class TagsCellComponent implements ICellRendererAngularComp {
     });
   }
 
-  refresh(params: ICellRendererParams<Restaurant, Restaurant['tags']>): boolean {
+  refresh(_params: ICellRendererParams<Restaurant, Restaurant['tags']>): boolean {
     return false;
   }
 }

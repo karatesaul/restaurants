@@ -23,10 +23,10 @@ export default class ViewLinkCellComponent implements ICellRendererAngularComp {
   id?: string;
 
   agInit(params: ICellRendererParams<Restaurant>): void {
-    this.id = String(params.data?.id)
+    this.id = String(params.data?.id);
   }
 
-  refresh(params: ICellRendererParams<Restaurant>): boolean {
+  refresh(_params: ICellRendererParams<Restaurant>): boolean {
     return false;
   }
 }

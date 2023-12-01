@@ -36,7 +36,7 @@ export default class CreateRestaurantComponent implements OnInit {
       })
     ).subscribe({
       complete: () => {
-        this.router.navigate(['..'], { relativeTo: this.route })
+        this.router.navigate(['..'], { relativeTo: this.route });
       }
     });
   }

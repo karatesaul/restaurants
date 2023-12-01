@@ -3,4 +3,4 @@ export interface Tag {
   value: string;
 }
 
-export interface CreateTagPayload extends Omit<Tag, 'id'> {}
+export type CreateTagPayload = Omit<Tag, 'id'>;

@@ -40,10 +40,10 @@ export default class RestaurantsComponent implements OnInit {
   constructor(private readonly restaurantService: RestaurantService) { }
 
   ngOnInit() {
-    this.restaurantService.list().subscribe(data => this.restaurants.set(data))
+    this.restaurantService.list().subscribe(data => this.restaurants.set(data));
   }
 
   onDeactivate() {
-    this.restaurantService.list().subscribe(data => this.restaurants.set(data))
+    this.restaurantService.list().subscribe(data => this.restaurants.set(data));
   }
 }

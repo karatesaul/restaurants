@@ -76,7 +76,7 @@ export default class CreateRestaurantDialogComponent implements OnInit {
         }
 
         this.tags.push(tag);
-      })
+      });
     }
 
     event.chipInput.clear();
@@ -84,14 +84,14 @@ export default class CreateRestaurantDialogComponent implements OnInit {
   }
 
   filterTags(): Tag[] {
-    return this.existingTags().filter((tag: Tag) => tag.value.includes(this.filterValue()))
+    return this.existingTags().filter((tag: Tag) => tag.value.includes(this.filterValue()));
   }
 
   getRestaurantPayload(): CreateRestaurantPayload {
     return {
       ...this.form.value,
       tags: this.tags.map((tag: Tag) => tag.id)
-    } as CreateRestaurantPayload
+    } as CreateRestaurantPayload;
   }
 
   remove(tag: Tag): void {

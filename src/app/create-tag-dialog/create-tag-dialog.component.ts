@@ -32,6 +32,6 @@ export default class CreateTagDialogComponent {
   }
 
   getTagPayload(): CreateTagPayload {
-    return this.form.value
+    return this.form.value;
   }
 }

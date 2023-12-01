@@ -32,10 +32,10 @@ export default class TagsComponent implements OnInit {
   constructor(private readonly tagsService: TagsService) { }
 
   ngOnInit(): void {
-    this.tagsService.list().subscribe(data => this.tags.set(data))
+    this.tagsService.list().subscribe(data => this.tags.set(data));
   }
 
   onDeactivate(): void {
-    this.tagsService.list().subscribe(data => this.tags.set(data))
+    this.tagsService.list().subscribe(data => this.tags.set(data));
   }
 }

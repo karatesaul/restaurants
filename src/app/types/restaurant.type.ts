@@ -6,4 +6,4 @@ export interface Restaurant {
   tags: NonNullable<Tag['id']>[];
 }
 
-export interface CreateRestaurantPayload extends Omit<Restaurant, 'id'> {}
+export type CreateRestaurantPayload = Omit<Restaurant, 'id'>;

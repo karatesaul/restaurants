@@ -5,10 +5,7 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export default class LoggerService {
-
-  constructor() { }
-
-  debug(...args: any[]) {
+  debug(...args: unknown[]) {
     if (environment.production) {
       return;
     }
@@ -16,7 +13,7 @@ export default class LoggerService {
     console.debug(...args);
   }
 
-  log(...args: any[]) {
+  log(...args: unknown[]) {
     if (environment.production) {
       return;
     }
@@ -24,11 +21,11 @@ export default class LoggerService {
     console.log(...args);
   }
 
-  warn(...args: any[]) {
+  warn(...args: unknown[]) {
     console.warn(...args);
   }
 
-  error(...args: any[]) {
+  error(...args: unknown[]) {
     console.error(...args);
   }
 }

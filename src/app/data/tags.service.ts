@@ -35,6 +35,6 @@ export default class TagsService {
   public searchIds(ids: number[]): Observable<Tag[]> {
     this.logger.debug('TagsService: Search');
 
-    return from(this.database.db.tags.where("id").anyOf(ids).toArray())
+    return from(this.database.db.tags.where("id").anyOf(ids).toArray());
   }
 }
