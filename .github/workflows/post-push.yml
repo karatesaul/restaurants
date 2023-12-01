@@ -1,0 +1,26 @@
+name: Post Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  post-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Run Install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: Lint
+        run: yarn run lint
