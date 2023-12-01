@@ -12,8 +12,15 @@ const routes: Routes = [{
     restaurant: restaurantResolver
   }
 }, {
+  path: 'search',
+  loadComponent: () => import('./app/search/search.component')
+}, {
   path: 'tags',
   loadComponent: () => import('./app/tags/tags.component'),
   loadChildren: () => import('./app/tags/tags.routes')
+}, {
+  path: '',
+  pathMatch: 'full',
+  redirectTo: 'search'
 }];
 export default routes;

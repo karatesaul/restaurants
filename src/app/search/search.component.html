@@ -1,0 +1,21 @@
+<div class="search">
+  <h1>Where should I eat?</h1>
+  <button (click)="randomSearch()"
+    color="primary"
+    mat-flat-button>
+    Give Me a Suggestion
+  </button>
+  <mat-card *ngIf="result()"
+    class="search-result">
+    <mat-card-header>
+      <h2>{{ result()?.name }}</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-chip-set>
+        <mat-chip *ngFor="let tag of resultTags()">
+          {{ tag.value }}
+        </mat-chip>
+      </mat-chip-set>
+    </mat-card-content>
+  </mat-card>
+</div>

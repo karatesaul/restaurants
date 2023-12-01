@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, from } from 'rxjs';
+import { EMPTY, Observable, from, map } from 'rxjs';
 import LoggerService from '../logger.service';
 import { Restaurant } from '../types/restaurant.type';
 import DatabaseService from './database.service';
@@ -21,7 +21,7 @@ export default class RestaurantService {
   }
 
   public read(id: number): Observable<Restaurant | undefined> {
-    this.logger.log('RestaurantService: Read', id);
+    this.logger.debug('RestaurantService: Read', id);
 
     return from(this.database.db.restaurants.get(id));
   }
@@ -37,9 +37,22 @@ export default class RestaurantService {
     return EMPTY;
   }
 
-  public randomSearch(): Observable<Restaurant> {
-    this.logger.log('RandomSearch: Empty Stub for now.');
-    return EMPTY;
+  public randomSearch(): Observable<Restaurant | undefined> {
+    this.logger.debug('RestaurantService: RandomSearch');
+    return from(this.database.db.restaurants.toArray()).pipe(
+      map((randomlySorted: Restaurant[]) => {
+        if (randomlySorted.length === 0) {
+          this.logger.debug('RestaurantService: RandomSearch: No Restaurants Found.');
+
+          return undefined;
+        }
+
+        const index: number = Math.floor(Math.random() * randomlySorted.length);
+        this.logger.debug('RestaurantService: RandomSearch: Index:', index);
+
+        return randomlySorted[index];
+      })
+    );
   }
 
   public update(_r: Restaurant): Observable<void> {
