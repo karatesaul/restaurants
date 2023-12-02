@@ -1,16 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import DeleteComponent from './delete.component';
 
-import RestaurantComponent from './restaurant.component';
-
-describe('RestaurantComponent', () => {
-  let component: RestaurantComponent;
-  let fixture: ComponentFixture<RestaurantComponent>;
+describe('DeleteComponent', () => {
+  let component: DeleteComponent;
+  let fixture: ComponentFixture<DeleteComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RestaurantComponent]
+      imports: [DeleteComponent]
     });
-    fixture = TestBed.createComponent(RestaurantComponent);
+    fixture = TestBed.createComponent(DeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

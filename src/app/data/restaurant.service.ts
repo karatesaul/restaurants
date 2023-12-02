@@ -60,8 +60,9 @@ export default class RestaurantService {
     return EMPTY;
   }
 
-  public delete(_id: string): Observable<void> {
-    this.logger.log('Delete: Empty Stub for now.');
-    return EMPTY;
+  public delete(id: number): Observable<void> {
+    this.logger.debug('RestaurantService: Delete', id);
+
+    return from(this.database.db.restaurants.delete(id));
   }
 }

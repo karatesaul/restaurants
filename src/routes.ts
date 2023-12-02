@@ -8,6 +8,7 @@ const routes: Routes = [{
 }, {
   path: 'restaurants/:id',
   loadComponent: () => import('./app/restaurant/restaurant.component'),
+  loadChildren: () => import('./app/restaurant/restaurant.routes'),
   resolve: {
     restaurant: restaurantResolver
   }

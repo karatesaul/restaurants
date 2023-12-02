@@ -1,5 +1,15 @@
 <div class="restaurant-page">
-  <h1>{{ restaurant()?.name }}</h1>
+  <header class="restaurant-header">
+    <h1>{{ restaurant()?.name }}</h1>
+    <button class="restaurant-delete"
+      color="warn"
+      mat-flat-button
+      routerLink="delete"
+      [state]="{ name: restaurant()?.name, type: 'restaurant' }">
+      Delete
+    </button>
+  </header>
+
   <div class="restaurant-tiles">
     <mat-card class="restaurant-tile">
       <mat-card-header>
@@ -15,3 +25,4 @@
     </mat-card>
   </div>
 </div>
+<router-outlet (deactivate)="onDeactivate()"></router-outlet>

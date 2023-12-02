@@ -3,6 +3,14 @@
   box-sizing: border-box;
 }
 
+.restaurant-header {
+  display: flex;
+}
+
+.restaurant-delete {
+  margin-left: auto;
+}
+
 .restaurant-tiles {
   display: flex;
   gap: 2rem;
