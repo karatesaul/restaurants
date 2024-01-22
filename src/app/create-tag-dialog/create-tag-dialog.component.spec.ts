@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CreateTagDialogComponent } from './create-tag-dialog.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import CreateTagDialogComponent from './create-tag-dialog.component';
 
 describe('CreateTagDialogComponent', () => {
   let component: CreateTagDialogComponent;
@@ -8,7 +8,10 @@ describe('CreateTagDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CreateTagDialogComponent]
+      imports: [
+        CreateTagDialogComponent,
+        NoopAnimationsModule
+      ]
     });
     fixture = TestBed.createComponent(CreateTagDialogComponent);
     component = fixture.componentInstance;

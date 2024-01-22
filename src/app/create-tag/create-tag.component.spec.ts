@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CreateTagComponent } from './create-tag.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute } from '@angular/router';
+import CreateTagComponent from './create-tag.component';
 
 describe('CreateTagComponent', () => {
   let component: CreateTagComponent;
@@ -8,7 +9,14 @@ describe('CreateTagComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CreateTagComponent]
+      imports: [
+        CreateTagComponent,
+        NoopAnimationsModule
+      ],
+      providers: [{
+        provide: ActivatedRoute,
+        useValue: {}
+      }]
     });
     fixture = TestBed.createComponent(CreateTagComponent);
     component = fixture.componentInstance;

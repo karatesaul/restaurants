@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ViewLinkCellComponent } from './view-link-cell.component';
+import { ActivatedRoute } from '@angular/router';
+import ViewLinkCellComponent from './view-link-cell.component';
 
 describe('ViewLinkCellComponent', () => {
   let component: ViewLinkCellComponent;
@@ -8,7 +8,11 @@ describe('ViewLinkCellComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ViewLinkCellComponent]
+      imports: [ViewLinkCellComponent],
+      providers: [{
+        provide: ActivatedRoute,
+        useValue: {}
+      }]
     });
     fixture = TestBed.createComponent(ViewLinkCellComponent);
     component = fixture.componentInstance;

@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import DeleteComponent from './delete.component';
 
 describe('DeleteComponent', () => {
@@ -7,8 +9,16 @@ describe('DeleteComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [DeleteComponent]
+      imports: [DeleteComponent],
+      providers: [{
+        provide: ActivatedRoute,
+        useValue: {}
+      }]
     });
+
+    const location: Location = TestBed.inject(Location);
+    spyOn(location, 'getState').and.returnValue({});
+
     fixture = TestBed.createComponent(DeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

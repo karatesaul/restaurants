@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TagsCellComponent } from './tags-cell.component';
+import TagsCellComponent from './tags-cell.component';
 
 describe('TagsCellComponent', () => {
   let component: TagsCellComponent;

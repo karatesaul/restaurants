@@ -1,4 +1,4 @@
-import { DarkThemePipe } from './dark-theme.pipe';
+import DarkThemePipe from './dark-theme.pipe';
 
 describe('DarkThemePipe', () => {
   it('create an instance', () => {

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CreateRestaurantDialogComponent } from './create-restaurant-dialog.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import CreateRestaurantDialogComponent from './create-restaurant-dialog.component';
 
 describe('CreateRestaurantDialogComponent', () => {
   let component: CreateRestaurantDialogComponent;
@@ -8,7 +8,10 @@ describe('CreateRestaurantDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CreateRestaurantDialogComponent]
+      imports: [
+        CreateRestaurantDialogComponent,
+        NoopAnimationsModule
+      ]
     });
     fixture = TestBed.createComponent(CreateRestaurantDialogComponent);
     component = fixture.componentInstance;
