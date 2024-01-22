@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, switchMap } from 'rxjs';
@@ -20,7 +20,8 @@ export default class CreateRestaurantComponent implements OnInit {
     private readonly matDialog: MatDialog,
     private readonly restaurantService: RestaurantService,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly zone: NgZone
   ) { }
 
   public ngOnInit(): void {
@@ -35,9 +36,7 @@ export default class CreateRestaurantComponent implements OnInit {
         return this.restaurantService.create(data);
       })
     ).subscribe({
-      complete: () => {
-        this.router.navigate(['..'], { relativeTo: this.route });
-      }
+      complete: () => this.zone.run(() => this.router.navigate(['..'], { relativeTo: this.route }))
     });
   }
 }

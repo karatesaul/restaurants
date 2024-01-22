@@ -1,5 +1,5 @@
 import { CommonModule, Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import DeleteDialogComponent from '../delete-dialog/delete-dialog.component';
@@ -23,7 +23,8 @@ export default class DeleteComponent implements OnInit {
     private readonly matDialog: MatDialog,
     private readonly location: Location,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly zone: NgZone
   ) { }
 
   public ngOnInit(): void {
@@ -33,13 +34,15 @@ export default class DeleteComponent implements OnInit {
         name: state.name,
         type: state.type
       }
-    }).afterClosed().subscribe((result: boolean) => {
-      this.router.navigate(['..'], {
-        relativeTo: this.route,
-        state: {
-          delete: result
-        }
-      });
-    });
+    }).afterClosed().subscribe((result: boolean) =>
+      this.zone.run(() =>
+        this.router.navigate(['..'], {
+          relativeTo: this.route,
+          state: {
+            delete: result
+          }
+        })
+      )
+    );
   }
 }

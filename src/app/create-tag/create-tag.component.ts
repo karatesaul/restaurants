@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, switchMap } from 'rxjs';
@@ -20,7 +20,8 @@ export default class CreateTagComponent implements OnInit {
     private readonly matDialog: MatDialog,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly tagsService: TagsService
+    private readonly tagsService: TagsService,
+    private readonly zone: NgZone
   ) { }
 
   public ngOnInit(): void {
@@ -33,9 +34,7 @@ export default class CreateTagComponent implements OnInit {
         return this.tagsService.create(data);
       })
     ).subscribe({
-      complete: () => {
-        this.router.navigate(['..'], { relativeTo: this.route });
-      }
+      complete: () => this.zone.run(() => this.router.navigate(['..'], { relativeTo: this.route }))
     });
   }
 }
