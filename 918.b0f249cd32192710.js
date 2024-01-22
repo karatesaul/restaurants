@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkrestaurants=self.webpackChunkrestaurants||[]).push([[918],{8918:(l,t,s)=>{s.r(t),s.d(t,{default:()=>n});const n=[{path:"delete",loadComponent:()=>Promise.all([s.e(580),s.e(365)]).then(s.bind(s,1365))}]}}]);
