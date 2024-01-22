@@ -22,5 +22,11 @@ jobs:
         with:
           cmd: install
 
+      - name: Build
+        run: yarn run build:prod
+
       - name: Lint
         run: yarn run lint
+
+      - name: Test
+        run: yarn run test:run
