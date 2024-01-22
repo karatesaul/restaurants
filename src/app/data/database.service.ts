@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Dexie, { Table } from "dexie";
+import Dexie, { Table } from 'dexie';
 import LoggerService from '../logger.service';
 import { Restaurant } from '../types/restaurant.type';
 import { Tag } from '../types/tag.type';

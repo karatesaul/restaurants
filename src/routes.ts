@@ -1,5 +1,5 @@
-import { Routes } from "@angular/router";
-import restaurantResolver from "./app/restaurant/restaurant.resolver";
+import { Routes } from '@angular/router';
+import restaurantResolver from './app/restaurant/restaurant.resolver';
 
 const routes: Routes = [{
   path: 'restaurants',
