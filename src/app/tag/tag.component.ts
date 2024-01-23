@@ -41,7 +41,7 @@ export default class TagComponent {
         return;
       }
 
-      this.tagsService.delete(id);
+      this.sub.add(this.tagsService.delete(id).subscribe());
       this.router.navigate(['..'], { relativeTo: this.route });
     }
   }

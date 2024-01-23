@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, from, throwError } from 'rxjs';
+import { Observable, from, tap, throwError } from 'rxjs';
 import { isEachItemDefined } from '../is-defined';
 import LoggerService from '../logger.service';
+import { Restaurant } from '../types/restaurant.type';
 import { CreateTagPayload, Tag } from '../types/tag.type';
 import DatabaseService from './database.service';
 
@@ -38,7 +39,15 @@ export default class TagsService {
       return throwError(() => new Error('ID required to delete tag.'));
     }
 
-    return from(this.database.db.tags.delete(id));
+    return from(this.database.db.tags.delete(id)).pipe(
+      tap(() => {
+        this.logger.debug('TagsService: Delete: Removing Tags from Restaurants');
+        this.database.db.restaurants.where('tags').equals(id).modify((restaurant: Restaurant) => {
+          this.logger.debug('TagsService: Delete: Removing Tag from Restaurant', restaurant.id);
+          restaurant.tags = restaurant.tags.filter((tag: Tag['id']) => tag !== id);
+        });
+      })
+    );
   }
 
   public list(): Observable<Tag[]> {
@@ -48,7 +57,7 @@ export default class TagsService {
   }
 
   public searchIds(ids: Tag['id'][]): Observable<Tag[]> {
-    this.logger.debug('TagsService: Search');
+    this.logger.debug('TagsService: Search', ids);
 
     if (!isEachItemDefined(ids)) {
       return throwError(() => new Error('ID required to search tags.'));

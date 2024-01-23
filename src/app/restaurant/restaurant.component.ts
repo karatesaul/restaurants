@@ -56,7 +56,7 @@ export default class RestaurantComponent implements OnDestroy {
         return;
       }
 
-      this.restaurantService.delete(id);
+      this.sub.add(this.restaurantService.delete(id).subscribe());
       this.router.navigate(['..'], { relativeTo: this.route });
     }
   }
