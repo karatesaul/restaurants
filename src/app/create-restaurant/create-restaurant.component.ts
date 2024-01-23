@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, switchMap } from 'rxjs';
+import { EMPTY, Subscription, switchMap } from 'rxjs';
 import CreateRestaurantDialogComponent from '../create-restaurant-dialog/create-restaurant-dialog.component';
 import RestaurantService from '../data/restaurant.service';
 
@@ -15,7 +15,9 @@ import RestaurantService from '../data/restaurant.service';
   ],
   template: ''
 })
-export default class CreateRestaurantComponent implements OnInit {
+export default class CreateRestaurantComponent implements OnInit, OnDestroy {
+  private readonly sub: Subscription = new Subscription();
+
   constructor(
     private readonly matDialog: MatDialog,
     private readonly restaurantService: RestaurantService,
@@ -25,7 +27,7 @@ export default class CreateRestaurantComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.matDialog.open(CreateRestaurantDialogComponent, {
+    this.sub.add(this.matDialog.open(CreateRestaurantDialogComponent, {
       minWidth: 500
     }).afterClosed().pipe(
       switchMap(data => {
@@ -37,6 +39,10 @@ export default class CreateRestaurantComponent implements OnInit {
       })
     ).subscribe({
       complete: () => this.zone.run(() => this.router.navigate(['..'], { relativeTo: this.route }))
-    });
+    }));
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

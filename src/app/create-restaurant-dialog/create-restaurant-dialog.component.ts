@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, Signal, ViewChild, WritableSignal, computed, signal } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Signal, ViewChild, WritableSignal, computed, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { switchMap, tap } from 'rxjs';
+import { Subscription, switchMap, tap } from 'rxjs';
 import TagsService from '../data/tags.service';
 import { CreateRestaurantPayload } from '../types/restaurant.type';
 import { CreateTagPayload, Tag } from '../types/tag.type';
@@ -32,7 +32,9 @@ import { CreateTagPayload, Tag } from '../types/tag.type';
   templateUrl: './create-restaurant-dialog.component.html',
   styleUrls: ['./create-restaurant-dialog.component.scss']
 })
-export default class CreateRestaurantDialogComponent implements OnInit {
+export default class CreateRestaurantDialogComponent implements OnInit, OnDestroy {
+  private readonly sub: Subscription = new Subscription();
+
   public existingTags: WritableSignal<Tag[]> = signal([]);
   public filteredTags: Signal<Tag[]> = computed(() => this.filterTags());
   public filterValue: WritableSignal<string> = signal('');
@@ -53,15 +55,19 @@ export default class CreateRestaurantDialogComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.tagsService.list().subscribe(data => this.existingTags.set(data));
-    this.tagsCtrl.valueChanges.subscribe(value => this.filterValue.set(value));
+    this.sub.add(this.tagsService.list().subscribe(data => this.existingTags.set(data)));
+    this.sub.add(this.tagsCtrl.valueChanges.subscribe(value => this.filterValue.set(value)));
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   public add(event: MatChipInputEvent): void {
     const value: string = (event.value || '').trim();
 
     if (value) {
-      this.tagsService.create({
+      this.sub.add(this.tagsService.create({
         value
       } as CreateTagPayload).pipe(
         tap(() => {
@@ -76,7 +82,7 @@ export default class CreateRestaurantDialogComponent implements OnInit {
         }
 
         this.tags.push(tag);
-      });
+      }));
     }
 
     event.chipInput.clear();

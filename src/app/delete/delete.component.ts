@@ -1,7 +1,8 @@
 import { CommonModule, Location } from '@angular/common';
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import DeleteDialogComponent from '../delete-dialog/delete-dialog.component';
 
 export type DeleteComponentState = {
@@ -22,7 +23,9 @@ export type DeleteComponentResultState = {
   ],
   template: '',
 })
-export default class DeleteComponent implements OnInit {
+export default class DeleteComponent implements OnInit, OnDestroy {
+  private readonly sub: Subscription = new Subscription();
+
   constructor(
     private readonly matDialog: MatDialog,
     private readonly location: Location,
@@ -33,7 +36,7 @@ export default class DeleteComponent implements OnInit {
 
   public ngOnInit(): void {
     const state: DeleteComponentState = this.location.getState() as DeleteComponentState;
-    this.matDialog.open(DeleteDialogComponent, {
+    this.sub.add(this.matDialog.open(DeleteDialogComponent, {
       data: {
         name: state.name,
         type: state.type
@@ -47,6 +50,10 @@ export default class DeleteComponent implements OnInit {
           }
         })
       )
-    );
+    ));
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

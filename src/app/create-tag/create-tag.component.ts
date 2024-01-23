@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, switchMap } from 'rxjs';
+import { EMPTY, Subscription, switchMap } from 'rxjs';
 import CreateTagDialogComponent from '../create-tag-dialog/create-tag-dialog.component';
 import TagsService from '../data/tags.service';
 
@@ -15,7 +15,9 @@ import TagsService from '../data/tags.service';
   ],
   template: ''
 })
-export default class CreateTagComponent implements OnInit {
+export default class CreateTagComponent implements OnInit, OnDestroy {
+  private readonly sub: Subscription = new Subscription();
+
   constructor(
     private readonly matDialog: MatDialog,
     private readonly route: ActivatedRoute,
@@ -25,7 +27,7 @@ export default class CreateTagComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.matDialog.open(CreateTagDialogComponent).afterClosed().pipe(
+    this.sub.add(this.matDialog.open(CreateTagDialogComponent).afterClosed().pipe(
       switchMap(data => {
         if (!data) {
           return EMPTY;
@@ -35,6 +37,10 @@ export default class CreateTagComponent implements OnInit {
       })
     ).subscribe({
       complete: () => this.zone.run(() => this.router.navigate(['..'], { relativeTo: this.route }))
-    });
+    }));
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
