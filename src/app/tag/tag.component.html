@@ -1,6 +1,13 @@
 <div class="detail-page">
   <header class="detail-page-header">
     <h1>{{ tag()?.value }}</h1>
+    <button class="detail-page-delete"
+      color="warn"
+      mat-flat-button
+      routerLink="delete"
+      [state]="{ name: tag()?.value, type: 'tag' }">
+      Delete
+    </button>
   </header>
 
   <div class="detail-page-tiles">
@@ -14,3 +21,4 @@
     </mat-card>
   </div>
 </div>
+<router-outlet (deactivate)="onDeactivate()"></router-outlet>

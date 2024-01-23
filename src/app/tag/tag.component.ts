@@ -1,8 +1,11 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, WritableSignal, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
+import TagsService from '../data/tags.service';
+import { DeleteComponentResultState } from '../delete/delete.component';
 import { Tag } from '../types/tag.type';
 
 @Component({
@@ -10,7 +13,9 @@ import { Tag } from '../types/tag.type';
   standalone: true,
   imports: [
     CommonModule,
-    MatCardModule
+    MatButtonModule,
+    MatCardModule,
+    RouterModule
   ],
   templateUrl: './tag.component.html',
   styleUrls: ['./tag.component.scss']
@@ -21,8 +26,23 @@ export default class TagComponent {
   public tag: WritableSignal<Tag | null> = signal(null);
 
   constructor(
-    private readonly route: ActivatedRoute
+    private readonly location: Location,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly tagsService: TagsService
   ) {
     this.sub.add(this.route.data.subscribe((data: Data) => this.tag.set(data['tag'])));
+  }
+
+  public onDeactivate(): void {
+    if ((this.location.getState() as DeleteComponentResultState).delete) {
+      const id: number | undefined = this.tag()?.id;
+      if (!id) {
+        return;
+      }
+
+      this.tagsService.delete(id);
+      this.router.navigate(['..'], { relativeTo: this.route });
+    }
   }
 }
