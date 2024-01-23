@@ -1,21 +1,3 @@
-.restaurant-page {
-  padding: 2rem;
-  box-sizing: border-box;
-}
+@use '../../assets/mixins' as mixins;
 
-.restaurant-header {
-  display: flex;
-}
-
-.restaurant-delete {
-  margin-left: auto;
-}
-
-.restaurant-tiles {
-  display: flex;
-  gap: 2rem;
-}
-
-.restaurant-tile {
-  width: 33%;
-}
+@include mixins.detail-page;

@@ -1,3 +1,33 @@
+@mixin detail-page {
+  .detail-page {
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  .detail-page-header {
+    display: flex;
+  }
+
+  .detail-page-delete {
+    margin-left: auto;
+  }
+
+  .detail-page-tiles {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .detail-page-tile {
+    width: 33%;
+  }
+}
+
+@mixin form-layout {
+  .form-layout-field {
+    display: flex;
+  }
+}
+
 @mixin list-page {
   .list-page {
     height: 100%;
@@ -17,11 +47,5 @@
 
   .list-table {
     flex: 1;
-  }
-}
-
-@mixin form-layout {
-  .form-layout-field {
-    display: flex;
   }
 }
