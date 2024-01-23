@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, from, map } from 'rxjs';
+import { EMPTY, Observable, from, map, throwError } from 'rxjs';
 import LoggerService from '../logger.service';
 import { Restaurant } from '../types/restaurant.type';
 import DatabaseService from './database.service';
@@ -20,8 +20,12 @@ export default class RestaurantService {
     return from(this.database.db.restaurants.add(payload));
   }
 
-  public read(id: number): Observable<Restaurant | undefined> {
+  public read(id: Restaurant['id']): Observable<Restaurant | undefined> {
     this.logger.debug('RestaurantService: Read', id);
+
+    if (!id) {
+      return throwError(() => new Error('ID required to get Restaurant'));
+    }
 
     return from(this.database.db.restaurants.get(id));
   }
@@ -60,8 +64,12 @@ export default class RestaurantService {
     return EMPTY;
   }
 
-  public delete(id: number): Observable<void> {
+  public delete(id: Restaurant['id']): Observable<void> {
     this.logger.debug('RestaurantService: Delete', id);
+
+    if (!id) {
+      return throwError(() => new Error('ID required to delete Restaurant'));
+    }
 
     return from(this.database.db.restaurants.delete(id));
   }

@@ -7,12 +7,9 @@ import { ActivatedRoute, Data, Router, RouterModule } from '@angular/router';
 import { Subscription, switchMap, tap } from 'rxjs';
 import RestaurantService from '../data/restaurant.service';
 import TagsService from '../data/tags.service';
+import { DeleteComponentResultState } from '../delete/delete.component';
 import { Restaurant } from '../types/restaurant.type';
 import { Tag } from '../types/tag.type';
-
-export interface RestaurantComponentState {
-  delete: boolean;
-}
 
 @Component({
   selector: 'restaurant',
@@ -53,7 +50,7 @@ export default class RestaurantComponent implements OnDestroy {
   }
 
   public onDeactivate(): void {
-    if ((this.location.getState() as RestaurantComponentState).delete) {
+    if ((this.location.getState() as DeleteComponentResultState).delete) {
       const id: number | undefined = this.restaurant()?.id;
       if (!id) {
         return;

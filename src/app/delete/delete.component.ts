@@ -4,10 +4,14 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import DeleteDialogComponent from '../delete-dialog/delete-dialog.component';
 
-export interface DeleteComponentState {
+export type DeleteComponentState = {
   name: string;
   type: string;
-}
+};
+
+export type DeleteComponentResultState = {
+  delete: boolean;
+};
 
 @Component({
   selector: 'delete',
