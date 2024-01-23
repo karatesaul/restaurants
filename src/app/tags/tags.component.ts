@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import DarkThemePipe from '../dark-theme.pipe';
 import TagsService from '../data/tags.service';
 import { Tag } from '../types/tag.type';
+import ViewLinkCellComponent from '../view-link-cell/view-link-cell.component';
 
 @Component({
   selector: 'tags',
@@ -24,14 +25,21 @@ import { Tag } from '../types/tag.type';
 })
 export default class TagsComponent implements OnInit, OnDestroy {
   private readonly sub: Subscription = new Subscription();
+
   public columnDefs: ColDef[] = [{
     field: 'value',
     headerName: 'Name'
+  }, {
+    headerName: '',
+    cellRenderer: ViewLinkCellComponent,
+    type: 'rightAligned'
   }];
 
   public tags: WritableSignal<Tag[]> = signal([]);
 
-  constructor(private readonly tagsService: TagsService) { }
+  constructor(
+    private readonly tagsService: TagsService
+  ) { }
 
   public ngOnInit(): void {
     this.sub.add(this.tagsService.list().subscribe(data => this.tags.set(data)));
