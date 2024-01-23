@@ -1,4 +1,4 @@
-export default function isDefined<T>(value: T | undefined): value is T {
+export function isDefined<T>(value: T | undefined): value is T {
   return !!value;
 }
 
