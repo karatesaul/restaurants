@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkrestaurants=self.webpackChunkrestaurants||[]).push([[924],{924:(e,s,u)=>{u.r(s),u.d(s,{default:()=>t});const t=[]}}]);
