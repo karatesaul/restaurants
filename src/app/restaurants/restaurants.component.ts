@@ -7,8 +7,8 @@ import { ColDef } from 'ag-grid-community';
 import DarkThemePipe from '../dark-theme.pipe';
 import RestaurantService from '../data/restaurant.service';
 import { Restaurant } from '../types/restaurant.type';
+import ViewLinkCellComponent from '../view-link-cell/view-link-cell.component';
 import TagsCellComponent from './tags-cell/tags-cell.component';
-import ViewLinkCellComponent from './view-link-cell/view-link-cell.component';
 
 @Component({
   selector: 'restaurants',
