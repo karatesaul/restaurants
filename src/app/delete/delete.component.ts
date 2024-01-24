@@ -1,18 +1,10 @@
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Data, Router } from '@angular/router';
+import { Subscription, mergeMap } from 'rxjs';
 import DeleteDialogComponent from '../delete-dialog/delete-dialog.component';
-
-export type DeleteComponentState = {
-  name: string;
-  type: string;
-};
-
-export type DeleteComponentResultState = {
-  delete: boolean;
-};
+import { ResultStateType } from '../types/state.type';
 
 @Component({
   selector: 'delete',
@@ -28,29 +20,27 @@ export default class DeleteComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly matDialog: MatDialog,
-    private readonly location: Location,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly zone: NgZone
   ) { }
 
   public ngOnInit(): void {
-    const state: DeleteComponentState = this.location.getState() as DeleteComponentState;
-    this.sub.add(this.matDialog.open(DeleteDialogComponent, {
-      data: {
-        name: state.name,
-        type: state.type
-      }
-    }).afterClosed().subscribe((result: boolean) =>
+    this.route.data.pipe(
+      mergeMap((data: Data) => this.matDialog.open(DeleteDialogComponent, {
+        data: data['data']
+      }).afterClosed())
+    ).subscribe((result: boolean) =>
       this.zone.run(() =>
         this.router.navigate(['..'], {
           relativeTo: this.route,
           state: {
+            type: ResultStateType.Delete,
             delete: result
           }
         })
       )
-    ));
+    );
   }
 
   public ngOnDestroy(): void {

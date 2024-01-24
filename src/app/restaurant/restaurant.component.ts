@@ -7,8 +7,8 @@ import { ActivatedRoute, Data, Router, RouterModule } from '@angular/router';
 import { Subscription, switchMap, tap } from 'rxjs';
 import RestaurantService from '../data/restaurant.service';
 import TagsService from '../data/tags.service';
-import { DeleteComponentResultState } from '../delete/delete.component';
 import { Restaurant } from '../types/restaurant.type';
+import { DeleteResultState, ResultState, ResultStateType } from '../types/state.type';
 import { Tag } from '../types/tag.type';
 
 @Component({
@@ -50,14 +50,25 @@ export default class RestaurantComponent implements OnDestroy {
   }
 
   public onDeactivate(): void {
-    if ((this.location.getState() as DeleteComponentResultState).delete) {
-      const id: number | undefined = this.restaurant()?.id;
-      if (!id) {
-        return;
+    const state: ResultState = this.location.getState() as ResultState;
+    switch (state.type) {
+      case ResultStateType.Delete: {
+        this.onDelete(state);
       }
-
-      this.sub.add(this.restaurantService.delete(id).subscribe());
-      this.router.navigate(['..'], { relativeTo: this.route });
     }
+  }
+
+  public onDelete(state: DeleteResultState): void {
+    if (!state.delete) {
+      return;
+    }
+
+    const id: number | undefined = this.restaurant()?.id;
+    if (!id) {
+      return;
+    }
+
+    this.sub.add(this.restaurantService.delete(id).subscribe());
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 }

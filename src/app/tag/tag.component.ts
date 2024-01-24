@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute, Data, Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import TagsService from '../data/tags.service';
-import { DeleteComponentResultState } from '../delete/delete.component';
+import { DeleteResultState, ResultState, ResultStateType, } from '../types/state.type';
 import { Tag } from '../types/tag.type';
 
 @Component({
@@ -35,14 +35,25 @@ export default class TagComponent {
   }
 
   public onDeactivate(): void {
-    if ((this.location.getState() as DeleteComponentResultState).delete) {
-      const id: number | undefined = this.tag()?.id;
-      if (!id) {
-        return;
+    const state: ResultState = this.location.getState() as ResultState;
+    switch (state.type) {
+      case ResultStateType.Delete: {
+        this.onDelete(state);
       }
-
-      this.sub.add(this.tagsService.delete(id).subscribe());
-      this.router.navigate(['..'], { relativeTo: this.route });
     }
+  }
+
+  private onDelete(state: DeleteResultState): void {
+    if (!state.delete) {
+      return;
+    }
+
+    const id: number | undefined = this.tag()?.id;
+    if (!id) {
+      return;
+    }
+
+    this.sub.add(this.tagsService.delete(id).subscribe());
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 }
