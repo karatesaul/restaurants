@@ -1,3 +1,5 @@
+import { Tag } from './tag.type';
+
 export enum ResultStateType {
   Delete,
   EditTags
@@ -10,6 +12,7 @@ export type DeleteResultState = {
 
 export type EditTagsState = {
   type: ResultStateType.EditTags;
+  tags?: Tag[]
 };
 
 export type ResultState =

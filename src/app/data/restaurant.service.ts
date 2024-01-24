@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, from, map, throwError } from 'rxjs';
+import { EMPTY, Observable, from, map, mergeMap, throwError } from 'rxjs';
 import LoggerService from '../logger.service';
 import { Restaurant } from '../types/restaurant.type';
 import DatabaseService from './database.service';
@@ -14,7 +14,7 @@ export default class RestaurantService {
     private readonly logger: LoggerService
   ) { }
 
-  public create(payload: Restaurant): Observable<number> {
+  public create(payload: Restaurant): Observable<NonNullable<Restaurant['id']>> {
     this.logger.debug('RestaurantService: Create', payload);
 
     return from(this.database.db.restaurants.add(payload));
@@ -59,9 +59,22 @@ export default class RestaurantService {
     );
   }
 
-  public update(_r: Restaurant): Observable<void> {
-    this.logger.log('Update: Empty Stub for now.');
-    return EMPTY;
+  public update(id: Restaurant['id'], payload: Partial<Restaurant>): Observable<Restaurant | undefined> {
+    this.logger.log('RestaurantService: Update', id, payload);
+
+    if (!id) {
+      return throwError(() => new Error('ID required to update Restaurant'));
+    }
+
+    return from(this.database.db.restaurants.update(id, payload)).pipe(
+      mergeMap((updatedRecords: number) => {
+        if (!updatedRecords) {
+          throw new Error(`No records updated for id ${id} and payload ${payload}`);
+        }
+
+        return from(this.database.db.restaurants.get(id));
+      })
+    );
   }
 
   public delete(id: Restaurant['id']): Observable<void> {
