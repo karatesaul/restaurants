@@ -15,7 +15,10 @@
         <mat-card-title>Restaurants</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        Coming soon!
+        <mat-list>
+          <mat-list-item *ngFor="let restaurant of restaurants()">{{ restaurant.name }}</mat-list-item>
+        </mat-list>
+        <p *ngIf="!restaurants().length">No restaurants with this tag.</p>
       </mat-card-content>
     </mat-card>
   </div>

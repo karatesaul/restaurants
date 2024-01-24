@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, from, map, mergeMap, throwError } from 'rxjs';
+import { Observable, from, map, mergeMap, throwError } from 'rxjs';
 import LoggerService from '../logger.service';
 import { Restaurant } from '../types/restaurant.type';
+import { Tag } from '../types/tag.type';
 import DatabaseService from './database.service';
 
 @Injectable({
@@ -36,12 +37,13 @@ export default class RestaurantService {
     return from(this.database.db.restaurants.toArray());
   }
 
-  public search(): Observable<Restaurant[]> {
-    this.logger.log('Search: Empty Stub for now.');
-    return EMPTY;
+  public search(tagId: NonNullable<Tag['id']>): Observable<Restaurant[]> {
+    this.logger.log('RestaurantService: Search', tagId);
+
+    return from(this.database.db.restaurants.where('tags').equals(tagId).toArray());
   }
 
-  public randomSearch(): Observable<Restaurant | undefined> {
+  public randomSearch(_tags?: Tag[]): Observable<Restaurant | undefined> {
     this.logger.debug('RestaurantService: RandomSearch');
     return from(this.database.db.restaurants.toArray()).pipe(
       map((randomlySorted: Restaurant[]) => {
