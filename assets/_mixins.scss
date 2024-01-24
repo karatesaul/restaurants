@@ -20,6 +20,10 @@
   .detail-page-tile {
     width: 33%;
   }
+
+  .detail-page-tile-edit {
+    margin-left: auto;
+  }
 }
 
 @mixin form-layout {
