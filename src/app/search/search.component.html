@@ -1,5 +1,17 @@
 <div class="search">
   <h1>Where should I eat?</h1>
+  <mat-expansion-panel class="search-tags-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Tags</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-chip-listbox multiple="true"
+      (change)="onChange($event)">
+      <mat-chip-option *ngFor="let tag of allTags()"
+        [value]="tag.id">
+        {{ tag.value }}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </mat-expansion-panel>
   <button (click)="randomSearch()"
     color="primary"
     mat-flat-button>

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { PromiseExtended } from 'dexie';
 import { Observable, from, map, mergeMap, throwError } from 'rxjs';
+import { isEachItemDefined } from '../is-defined';
 import LoggerService from '../logger.service';
 import { Restaurant } from '../types/restaurant.type';
 import { Tag } from '../types/tag.type';
@@ -43,9 +45,19 @@ export default class RestaurantService {
     return from(this.database.db.restaurants.where('tags').equals(tagId).toArray());
   }
 
-  public randomSearch(_tags?: Tag[]): Observable<Restaurant | undefined> {
-    this.logger.debug('RestaurantService: RandomSearch');
-    return from(this.database.db.restaurants.toArray()).pipe(
+  public randomSearch(tags?: Tag['id'][]): Observable<Restaurant | undefined> {
+    this.logger.debug('RestaurantService: RandomSearch', tags);
+
+    let restaurants: PromiseExtended<Restaurant[]>;
+    if (!tags) {
+      restaurants = this.database.db.restaurants.toArray();
+    } else if (!isEachItemDefined(tags)) {
+      return throwError(() => new Error('Tag ID required to random search Restaurants using Tags.'));
+    } else  {
+      restaurants = this.database.db.restaurants.where('tags').anyOf(tags).toArray();
+    }
+
+    return from(restaurants).pipe(
       map((randomlySorted: Restaurant[]) => {
         if (randomlySorted.length === 0) {
           this.logger.debug('RestaurantService: RandomSearch: No Restaurants Found.');
