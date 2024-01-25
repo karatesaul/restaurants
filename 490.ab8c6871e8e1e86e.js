@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkrestaurants=self.webpackChunkrestaurants||[]).push([[490],{7490:(d,t,s)=>{s.r(t),s.d(t,{default:()=>n});const n=[{path:"add",loadComponent:()=>Promise.all([s.e(157),s.e(700),s.e(32),s.e(210)]).then(s.bind(s,8210))}]}}]);
