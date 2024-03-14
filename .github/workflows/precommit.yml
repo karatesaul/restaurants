@@ -1,8 +1,13 @@
-name: Precommit
-description: Runs production build, lint, and all tests on the code base.
-runs:
-  using: "composite"
+on:
+  workflow_call
+
+jobs:
+  precommit:
+    runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
