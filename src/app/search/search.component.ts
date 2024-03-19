@@ -29,7 +29,8 @@ export default class SearchComponent implements OnInit, OnDestroy {
   public allTags: WritableSignal<Tag[]> = signal([]);
   public result: WritableSignal<Restaurant | undefined> = signal(undefined);
   public resultTags: WritableSignal<Tag[]> = signal([]);
-  public selectedTags: Tag['id'][] = [];
+  public excludeTags: Tag['id'][] = [];
+  public includeTags: Tag['id'][] = [];
 
   constructor(
     private readonly restaurant: RestaurantService,
@@ -44,12 +45,16 @@ export default class SearchComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  public onChange(event: MatChipListboxChange): void {
-    this.selectedTags = event.value;
+  public onExcludeChange(event: MatChipListboxChange): void {
+    this.excludeTags = event.value;
+  }
+
+  public onIncludeChange(event: MatChipListboxChange): void {
+    this.includeTags = event.value;
   }
 
   public randomSearch(): void {
-    this.sub.add(this.restaurant.randomSearch(this.selectedTags).pipe(
+    this.sub.add(this.restaurant.randomSearch(this.includeTags, this.excludeTags).pipe(
       tap((restaurant: Restaurant | undefined) => this.result.set(restaurant)),
       switchMap((restaurant: Restaurant | undefined) => {
         if (!restaurant) { return EMPTY; }
