@@ -2,11 +2,24 @@
   <h1>Where should I eat?</h1>
   <mat-expansion-panel class="search-tags-panel">
     <mat-expansion-panel-header>
-      <mat-panel-title>Tags</mat-panel-title>
+      <mat-panel-title>Include Tags</mat-panel-title>
     </mat-expansion-panel-header>
     <mat-chip-listbox multiple="true"
-      (change)="onChange($event)">
+      (change)="onIncludeChange($event)">
       <mat-chip-option *ngFor="let tag of allTags()"
+        [value]="tag.id">
+        {{ tag.value }}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="search-tags-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Exclude Tags</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-chip-listbox multiple="true"
+      (change)="onExcludeChange($event)">
+      <mat-chip-option *ngFor="let tag of allTags()"
+        color="warn"
         [value]="tag.id">
         {{ tag.value }}
       </mat-chip-option>

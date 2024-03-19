@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PromiseExtended } from 'dexie';
+import { Collection } from 'dexie';
 import { Observable, from, map, mergeMap, throwError } from 'rxjs';
 import { isEachItemDefined } from '../is-defined';
 import LoggerService from '../logger.service';
@@ -45,19 +45,20 @@ export default class RestaurantService {
     return from(this.database.db.restaurants.where('tags').equals(tagId).toArray());
   }
 
-  public randomSearch(tags?: Tag['id'][]): Observable<Restaurant | undefined> {
-    this.logger.debug('RestaurantService: RandomSearch', tags);
+  public randomSearch(includeTags?: Tag['id'][], excludeTags?: Tag['id'][]): Observable<Restaurant | undefined> {
+    this.logger.debug('RestaurantService: RandomSearch', includeTags, excludeTags);
 
-    let restaurants: PromiseExtended<Restaurant[]>;
-    if (!tags) {
-      restaurants = this.database.db.restaurants.toArray();
-    } else if (!isEachItemDefined(tags)) {
-      return throwError(() => new Error('Tag ID required to random search Restaurants using Tags.'));
-    } else  {
-      restaurants = this.database.db.restaurants.where('tags').anyOf(tags).toArray();
+    let restaurants: Collection<Restaurant> = this.database.db.restaurants.toCollection();
+
+    if (includeTags && includeTags.length && isEachItemDefined(includeTags)) {
+      restaurants = restaurants.and((restaurant: Restaurant) => restaurant.tags.some((tag: NonNullable<Tag['id']>) => includeTags.includes(tag)));
     }
 
-    return from(restaurants).pipe(
+    if (excludeTags && excludeTags.length && isEachItemDefined(excludeTags)) {
+      restaurants = restaurants.and((restaurant: Restaurant) => !restaurant.tags.some((tag: NonNullable<Tag['id']>) => excludeTags.includes(tag)));
+    }
+
+    return from(restaurants.toArray()).pipe(
       map((randomlySorted: Restaurant[]) => {
         if (randomlySorted.length === 0) {
           this.logger.debug('RestaurantService: RandomSearch: No Restaurants Found.');
