@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkrestaurants=self.webpackChunkrestaurants||[]).push([[592],{5043:(a,t,s)=>{s.d(t,{L:()=>e});var e=(()=>((e=e||{})[e.Delete=0]="Delete",e[e.EditTags=1]="EditTags",e))()}}]);
